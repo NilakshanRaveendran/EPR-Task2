@@ -3,6 +3,7 @@ import './InvitationPage.css';
 
 const InvitationPage = () => {
   const [step, setStep] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     attending: '',
     guests: '1',
@@ -25,6 +26,42 @@ const InvitationPage = () => {
     <div className="premium-wrapper">
       <div className="premium-background"></div>
       
+      <button className="top-details-btn" onClick={() => setIsModalOpen(true)}>
+        Event Details
+      </button>
+
+      {isModalOpen && (
+        <div className="premium-modal-overlay" onClick={() => setIsModalOpen(false)}>
+          <div className="premium-modal fade-in-up" onClick={e => e.stopPropagation()}>
+            <button className="close-btn" onClick={() => setIsModalOpen(false)}>&times;</button>
+            <div className="modal-content">
+              <div className="modal-image"></div>
+              <div className="modal-text">
+                <h2 className="section-title" style={{marginBottom: '1rem'}}>The Details</h2>
+                <div className="detail-section expanded-info" style={{border: 'none', marginTop: 0, paddingTop: 0}}>
+                  <div className="info-row">
+                    <span className="info-label">Venue</span>
+                    <span className="info-value">The Starlight Pavilion<br/>990 Celestial Ave, Nightfall City</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Dress Code</span>
+                    <span className="info-value">Black Tie Optional</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Itinerary</span>
+                    <span className="info-value">6:00 PM &mdash; Cocktails<br/>7:30 PM &mdash; Dinner<br/>9:00 PM &mdash; Dancing</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Parking & Accommodations</span>
+                    <span className="info-value">Complimentary Valet Provided.<br/>A block of rooms has been reserved at The Starlight Hotel.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="premium-content-area">
         <div className={`premium-card step-${step}`}>
           {step === 1 && (
